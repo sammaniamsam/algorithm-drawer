@@ -1,2 +1,2 @@
 # algorithm-drawer
-Draws: AVL Trees, Binary Search Trees, and Graphs
+Draws: AVL Trees, Binary Search Trees, and Heap Trees
