@@ -6240,7 +6240,7 @@
 							"width": 100,
 							"height": 90,
 							"autoResize": false,
-							"text": "TreeFactory creates a single instance of Min Heap, Max Heap",
+							"text": "HeapFactory creates a single instance of Min Heap, Max Heap",
 							"wordWrap": true
 						},
 						{
