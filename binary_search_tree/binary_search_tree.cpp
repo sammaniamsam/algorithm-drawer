@@ -14,13 +14,12 @@ binary_search_tree::binary_search_tree()
 //The destructor shall call the private member function DestroyTree() to remove and delete all nodes in the tree.
 binary_search_tree::~binary_search_tree()
 {
-    DestroyTree(m_pRoot);
+    //DestroyTree(m_pRoot);
 }
 
 //---------------------------------
-//function: insert()
-//args: integer key
-//purpose: Creates a new node and
+//FUNCTION: insert()
+//PURPOSE: Creates a new node and
 //assigns it a key. Then, searches
 //for a position within the binary
 //tree to insert the new node.
@@ -30,29 +29,30 @@ void binary_search_tree::insert(int key)
     //define variables
     node *temp, *back, *newNode;
     temp = m_pRoot, back = NULL;
-
-    //create new node to be added into tree
     newNode = new node(key);
-    //newNode->left = newNode->right = NULL;	//TESTING
 
+    //search for place to insert
     while(temp != NULL)
     {
         back = temp;
-        if(newNode->key <= temp->key) //strcmp(newNode->key, temp->key) < 0
+        if(newNode->key <= temp->key)
             temp = temp->left;
         else
             temp = temp->right;
     }
 
+    //if newNode is root node
     if(back == NULL)
     {
         std::cout << "\nExecuting back == NULL";//TESTING
         m_pRoot = newNode;
         std::cout << "\nRoot: " << m_pRoot->key;//TESTING
     }
+
+    //newNode is not root node
     else
     {
-        if(newNode->key <= back->key)//strcmp(newNode->key, back->key) < 0
+        if(newNode->key <= back->key)
         {
             back->left = newNode;
             std::cout << "\n\n" << back->left->key << " is left of: " << back->key;//TESTING
@@ -68,7 +68,7 @@ void binary_search_tree::insert(int key)
 //This function shall take a single char array argument (the alien word). The function shall locate the alien word
 //in the binary tree, remove it from the tree and return the TNode structure to the caller. If the alien word was
 //not found then it shall return NULL.
-TNode *Translator::RemoveWord(char *aWord)
+/*TNode *Translator::RemoveWord(char *aWord)
 {
     //define variables
     TNode *back, *temp, *delParent, *delNode;
@@ -180,12 +180,12 @@ TNode *Translator::RemoveWord(char *aWord)
             return rNode;
         }//end case 2
     }//end at least one child
-}
+}*/
 //##############################################################################################################################
 //This function shall take two char array arguments: an alien word and its' English equivalent.
 //The function shall serch the binary tree, locate the alien word and change the English translation
 //to the new English word then return true. If the alien word was not found then it shall return false.
-bool Translator::ChangeWord(char *aWord, char *eWord)
+/*bool Translator::ChangeWord(char *aWord, char *eWord)
 {
     TNode *temp;
     temp = Search(aWord);
@@ -197,12 +197,12 @@ bool Translator::ChangeWord(char *aWord, char *eWord)
         strcpy(temp->EngWord, eWord);
         return true;
     }
-}
+}*/
 //##############################################################################################################################
 //This function shall take a string argument consisting of alien words separated by spaces to be translated into English.
 //The function shall parse out each word, look it up in the binary tree and print the English translation. All words
 //translated from a single string will appear on a single line on the screen.
-void Translator::Translate(char *line)
+/*void Translator::Translate(char *line)
 {
     char *token = NULL;
     TNode *temp;
@@ -226,30 +226,30 @@ void Translator::Translate(char *line)
         if (token != NULL)
             temp = Search(token);
     }
-}
+}*/
 //##############################################################################################################################
 //This function shall call the private function PrintAll() passing in the root of the tree.
-void Translator::PrintAll()
+void binary_search_tree::PrintAll()
 {
     PrintAll(m_pRoot);
 }
 //##############################################################################################################################
 //This function shall call the private function PrintAll() passing in the root of the tree.
-void Translator::PrintAll(TNode *rt)
+void binary_search_tree::PrintAll(node *root)
 {
-    if(rt != NULL)
+    if(root != NULL)
     {
         //Print left sub-tree
-        PrintAll(rt->left);
-        std::cout << "\n" << rt->key << " " << rt->EngWord;
+        PrintAll(root->left);
+        std::cout << "\n" << root->key;//TESTING
         //Print right sub-tree
-        PrintAll(rt->right);
+        PrintAll(root->right);
     }
 }
 //##############################################################################################################################
 //This function shall search the tree and return a pointer to the node wit the key aWord
 //or NULL if the word was not found.
-TNode *Translator::Search(char *aWord)
+/*TNode *Translator::Search(char *aWord)
 {
     TNode *temp;
     temp = m_pRoot;
@@ -268,11 +268,11 @@ TNode *Translator::Search(char *aWord)
     }
     else
         return temp;
-}
+}*/
 //##############################################################################################################################
 //This function shall recursively traverse (post-order traversal) and destroy all
 //nodes in the tree
-void Translator::DestroyTree(TNode *rt)
+/*void Translator::DestroyTree(TNode *rt)
 {
     if (rt == NULL)
         return;
@@ -284,4 +284,4 @@ void Translator::DestroyTree(TNode *rt)
     delete rt;
     rt = NULL;//TESTING
     return;
-}
+}*/
