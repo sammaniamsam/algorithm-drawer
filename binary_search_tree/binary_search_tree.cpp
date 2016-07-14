@@ -5,42 +5,42 @@
 //This program is entirely my own work (statement required by UAH CS Dep.)
 //========================================================================
 //##############################################################################################################################
-#include "binarySearchTree.h"
+#include "binary_search_tree.h"
 //##############################################################################################################################
 //The constructor shall set the private pointer m_pRoot to NULL
-Translator::Translator()
+binary_search_tree::binary_search_tree()
 {
     m_pRoot = NULL;
 }
 //##############################################################################################################################
 //The destructor shall call the private member function DestroyTree() to remove and delete all nodes in the tree.
-Translator::~Translator()
+binary_search_tree::~binary_search_tree()
 {
     DestroyTree(m_pRoot);
 }
-//##############################################################################################################################
-//This function shall take two char array arguments: an alien word and its' English equivalent. The function
-//shall create an instance of TNode, insert the alien word as the key and teh English word as teh translation into the TNode
-//structure then insert that structure into the Translator's binary tree.
-void Translator::InsertWord(char *aWord, char *eWord)
+
+//---------------------------------
+//function: insert()
+//args: integer key
+//purpose: Creates a new node and
+//assigns it a key. Then, searches
+//for a position within the binary
+//tree to insert the new node.
+//---------------------------------
+void binary_search_tree::insert(int key)
 {
     //define variables
-    TNode *temp, *back, *newNode;
+    node *temp, *back, *newNode;
     temp = m_pRoot, back = NULL;
 
     //create new node to be added into tree
-    newNode = new TNode();
-    newNode->left = newNode->right = NULL;	//TESTING
-
-    //Copy aWord into new node key
-    strcpy(newNode->key, aWord);
-    //copy eWord into new node EngWord
-    strcpy(newNode->EngWord, eWord);
+    newNode = new node(key);
+    //newNode->left = newNode->right = NULL;	//TESTING
 
     while(temp != NULL)
     {
         back = temp;
-        if(strcmp(newNode->key, temp->key) < 0)
+        if(newNode->key <= temp->key) //strcmp(newNode->key, temp->key) < 0
             temp = temp->left;
         else
             temp = temp->right;
@@ -54,7 +54,7 @@ void Translator::InsertWord(char *aWord, char *eWord)
     }
     else
     {
-        if(strcmp(newNode->key, back->key) < 0)
+        if(newNode->key <= back->key)//strcmp(newNode->key, back->key) < 0
         {
             back->left = newNode;
             std::cout << "\n\n" << back->left->key << " is left of: " << back->key;//TESTING

@@ -17,6 +17,7 @@ struct node // the structure for representing tree nodes
     node* right;
     node(int k) { key = k; left = right = NULL; height = 1; }
 };
+//---------------------------------
 
 class maxHeap
 {
