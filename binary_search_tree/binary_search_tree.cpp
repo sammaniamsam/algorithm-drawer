@@ -29,10 +29,42 @@ void binary_search_tree::DestroyTree(node *root)
 }
 
 //---------------------------------
+//FUNCTION: preorderTraversal()
+//PURPOSE: Performs a pre-order
+//traversal of the BST and stores
+//route taken in path queue
+//---------------------------------
+void binary_search_tree::preorderTraversal(node *root, std::queue<node *> *path)
+{
+    if(root != NULL)
+    {
+        path->push(root);
+        this->preorderTraversal(root->left, path);
+        this->preorderTraversal(root->right, path);
+    }
+}
+
+//---------------------------------
+//FUNCTION: inorderTraversal()
+//PURPOSE: Performs a in-order
+//traversal of the BST and stores
+//route taken in path queue
+//---------------------------------
+void binary_search_tree::inorderTraversal(node *root, std::queue<node *> *path)
+{
+    if(root != NULL)
+    {
+        this->inorderTraversal(root->left, path);
+        path->push(root);
+        this->inorderTraversal(root->right, path);
+    }
+}
+
+//---------------------------------
 //FUNCTION: postorderTraversal()
-//PURPOSE: Performs a post order
-//taversal of the BST and stroes
-//route take in path queue
+//PURPOSE: Performs a post-order
+//traversal of the BST and stores
+//route taken in path queue
 //---------------------------------
 void binary_search_tree::postorderTraversal(node *root, std::queue<node *> *path)
 {
@@ -120,6 +152,30 @@ void binary_search_tree::insert(int key)
 }
 
 //---------------------------------
+//FUNCTION: preorderTraversal()
+//PURPOSE: Calls private fctn
+//preorderTraversal() and passes
+//it queue that stores the traversal
+//path.
+//---------------------------------
+void binary_search_tree::preorderTraversal(std::queue<node *> *path)
+{
+    this->preorderTraversal(this->m_pRoot, path);
+}
+
+//---------------------------------
+//FUNCTION: inorderTraversal()
+//PURPOSE: Calls private fctn
+//inorderTraversal() and passes
+//it queue that stores the traversal
+//path.
+//---------------------------------
+void binary_search_tree::inorderTraversal(std::queue<node *> *path)
+{
+    this->inorderTraversal(this->m_pRoot, path);
+}
+
+//---------------------------------
 //FUNCTION: postorderTraversal()
 //PURPOSE: Calls private fctn
 //postorderTraversal() and passes
@@ -130,6 +186,7 @@ void binary_search_tree::postorderTraversal(std::queue<node *> *path)
 {
     this->postorderTraversal(this->m_pRoot, path);
 }
+
 //##############################################################################################################################
 //This function shall take a single char array argument (the alien word). The function shall locate the alien word
 //in the binary tree, remove it from the tree and return the TNode structure to the caller. If the alien word was

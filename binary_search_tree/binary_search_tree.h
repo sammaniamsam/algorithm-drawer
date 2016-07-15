@@ -24,15 +24,13 @@ class binary_search_tree
 {
 
 private:
+    node *m_pRoot; //pointer to root node in BST
 
-    //private variable
-    node *m_pRoot;
-
-    //private functions
+    void preorderTraversal(node *root, std::queue<node *> *path);
+    void inorderTraversal(node *root, std::queue<node *> *path);
     void postorderTraversal(node *root, std::queue<node *> *path);
     //TNode *Search(char *aWord);
     void DestroyTree(node *root);
-
 
 public:
     binary_search_tree();
@@ -41,6 +39,8 @@ public:
     //TNode *RemoveWord(char *aWord);
     //bool ChangeWord(char *aWord, char *eWord);
     //void Translate(char *line);
+    void preorderTraversal(std::queue<node *> *path);
+    void inorderTraversal(std::queue<node *> *path);
     void postorderTraversal(std::queue<node *> *path);
 };
 
