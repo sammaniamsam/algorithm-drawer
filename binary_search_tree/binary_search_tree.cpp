@@ -12,17 +12,17 @@
 //---------------------------------
 
 //---------------------------------
-//FUNCTION: DestroyTree()
+//FUNCTION: destroyTree()
 //PURPOSE: uses post-order traversal
 //to destroy all nodes in the BST
 //---------------------------------
-void binary_search_tree::DestroyTree(node *root)
+void binary_search_tree::destroyTree(node *root)
 {
     if (root == NULL) return;
     if (root->left != NULL)
-        this->DestroyTree(root->left);
+        this->destroyTree(root->left);
     if (root->right != NULL)
-        this->DestroyTree(root->right);
+        this->destroyTree(root->right);
     std::cout << "\nDeleting: " << root->key; //TESTING
     delete root;
     return;
@@ -100,7 +100,7 @@ binary_search_tree::binary_search_tree()
 //---------------------------------
 binary_search_tree::~binary_search_tree()
 {
-    this->DestroyTree(this->m_pRoot);
+    this->destroyTree(this->m_pRoot);
 }
 
 //---------------------------------
@@ -187,40 +187,42 @@ void binary_search_tree::postorderTraversal(std::queue<node *> *path)
     this->postorderTraversal(this->m_pRoot, path);
 }
 
-//##############################################################################################################################
-//This function shall take a single char array argument (the alien word). The function shall locate the alien word
-//in the binary tree, remove it from the tree and return the TNode structure to the caller. If the alien word was
-//not found then it shall return NULL.
-/*TNode *Translator::RemoveWord(char *aWord)
+//---------------------------------
+//FUNCTION: removeNode()
+//PURPOSE: Removes a single node
+//from the BST. Two cases:
+//Case 1 -- delete node with no
+//          children or one child
+//Case 2 -- delete node with two
+//          children
+//---------------------------------
+bool binary_search_tree::removeNode(int key)
 {
     //define variables
-    TNode *back, *temp, *delParent, *delNode;
+    node *back, *temp, *delParent, *delNode;
     temp = m_pRoot, back = NULL;
-    TNode *rNode = new TNode();
-    //rNode->left = rNode->right = NULL;	//TESTING
 
-    //locate the aWord in the binary tree
-    while((temp != NULL) && (strcmp(aWord, temp->key) != 0))
+    //search for node to delete
+    while((temp != NULL) && (key != temp->key))
     {
         back = temp;
-        if(strcmp(aWord, temp->key) < 0)
+        if(key < temp->key)
             temp = temp->left;
         else
             temp = temp->right;
     }
 
-    //Didn't find the one to remove
+    //didn't find the node to remove
     if(temp == NULL)
     {
-        std::cout << "\naWord " << aWord << " was not found. Nothing removed\n";
-        delete rNode;	//TESTING
-        return NULL;
+        std::cout << "\n" << "key: " << key << " was not found" << "\n";//TESTING
+        return false;
     }
 
-        //found node to remove
+    //found node to remove
     else
     {
-        //Deleting the root
+        //deleting the root
         if(temp == m_pRoot)
         {
             delNode = m_pRoot;
@@ -231,21 +233,19 @@ void binary_search_tree::postorderTraversal(std::queue<node *> *path)
             delNode = temp;
             delParent = back;
         }
-
-        //Copy contents of node that was found into node that is to be returned
-        strcpy(rNode->key, delNode->key);
-        strcpy(rNode->EngWord, delNode->EngWord);
     }
-
+    //- - - - - - - - - - - - - - - - - - - - - - - - - -
     //Case 1: Deleting node with no children or one child
+    //- - - - - - - - - - - - - - - - - - - - - - - - - -
+    //node to delete has left child
     if (delNode->right == NULL)
     {
-        //If deleting root
+        //if deleting root
         if(delParent == NULL)
         {
             m_pRoot = delNode->left;
             delete delNode;
-            return rNode;
+            return true;
         }
         else
         {
@@ -254,20 +254,20 @@ void binary_search_tree::postorderTraversal(std::queue<node *> *path)
             else
                 delParent->right = delNode->left;
             delete delNode;
-            return rNode;
+            return true;
         }
-    }//end case 1
-        //There is at least one child
+    }
+    //node to delete has right child
     else
     {
-        //Only 1 child and it is on the right
         if(delNode->left == NULL)
         {
+            //if deleting root
             if(delParent == NULL)
             {
                 m_pRoot = delNode->right;
                 delete delNode;
-                return rNode;
+                return true;
             }
             else
             {
@@ -276,23 +276,26 @@ void binary_search_tree::postorderTraversal(std::queue<node *> *path)
                 else
                     delParent->right = delNode->right;
                 delete delNode;
-                return rNode;
+                return true;
             }
         }
-            //Case 2: Deleting node with two children
+        //- - - - - - - - - - - - - - - - - - - -
+        //Case 2: Deleting node with two children
+        //- - - - - - - - - - - - - - - - - - - -
         else
         {
             temp = delNode->left;
             back = delNode;
 
+            //get the largest node in
+            //delNode's left child's subtree
             while(temp->right != NULL)
             {
                 back = temp;
                 temp = temp->right;
             }
-            //Copy the replacement values into the node to be removed
-            strcpy(delNode->key, temp->key);
-            strcpy(delNode->EngWord, temp->EngWord);
+            //Copy the replacement value(s) into the node to be removed
+            delNode->key = temp->key;
 
             //Remove the replacement node from the tree
             if(back == delNode)
@@ -300,10 +303,10 @@ void binary_search_tree::postorderTraversal(std::queue<node *> *path)
             else
                 back->right = temp->left;
             delete temp;
-            return rNode;
-        }//end case 2
-    }//end at least one child
-}*/
+            return true;
+        }//end Case 2
+    }
+}
 //##############################################################################################################################
 //This function shall take two char array arguments: an alien word and its' English equivalent.
 //The function shall serch the binary tree, locate the alien word and change the English translation
