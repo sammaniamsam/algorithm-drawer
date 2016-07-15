@@ -28,9 +28,9 @@ private:
     node *m_pRoot;
 
     //private functions
-    void PrintAll(node *rt);
+    void printAll(node *root);
     //TNode *Search(char *aWord);
-    //void DestroyTree(TNode *rt);
+    void DestroyTree(node *root);
 
 
 public:
@@ -40,7 +40,7 @@ public:
     //TNode *RemoveWord(char *aWord);
     //bool ChangeWord(char *aWord, char *eWord);
     //void Translate(char *line);
-    void PrintAll();
+    void printAll();
 };
 
 #endif //BINARY_SEARCH_TREE_BINARYSEARCHTREE_H

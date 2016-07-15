@@ -2,19 +2,56 @@
 // binary_search_tree.cpp
 // Author: sammaniamsam
 //====================================================================
-//##############################################################################################################################
 #include "binary_search_tree.h"
-//##############################################################################################################################
-//The constructor shall set the private pointer m_pRoot to NULL
+//---------------------------------
+
+//---------------------------------
+//---------------------------------
+//--------PRIVATE METHODS----------
+//---------------------------------
+//---------------------------------
+
+//---------------------------------
+//FUNCTION: DestroyTree()
+//PURPOSE: uses post-order traversal
+//to destroy all nodes in the BST
+//---------------------------------
+void binary_search_tree::DestroyTree(node *root)
+{
+    if (root == NULL) return;
+    if (root->left != NULL)
+        this->DestroyTree(root->left);
+    if (root->right != NULL)
+        this->DestroyTree(root->right);
+    std::cout << "\nDeleting: " << root->key; //TESTING
+    delete root;
+    return;
+}
+
+//---------------------------------
+//---------------------------------
+//--------PUBLIC METHODS----------
+//---------------------------------
+//---------------------------------
+
+//---------------------------------
+//FUNCTION: binary_search_tree()
+//PURPOSE: sets m_pRoot to NULL
+//---------------------------------
 binary_search_tree::binary_search_tree()
 {
-    m_pRoot = NULL;
+    this->m_pRoot = NULL;
 }
-//##############################################################################################################################
-//The destructor shall call the private member function DestroyTree() to remove and delete all nodes in the tree.
+
+//---------------------------------
+//FUNCTION: ~binary_search_tree()
+//PURPOSE: Calls private fctn DestroyTree
+//and passes in the private member variable
+//m_pRoot.
+//---------------------------------
 binary_search_tree::~binary_search_tree()
 {
-    //DestroyTree(m_pRoot);
+    this->DestroyTree(this->m_pRoot);
 }
 
 //---------------------------------
@@ -28,7 +65,7 @@ void binary_search_tree::insert(int key)
 {
     //define variables
     node *temp, *back, *newNode;
-    temp = m_pRoot, back = NULL;
+    temp = this->m_pRoot, back = NULL;
     newNode = new node(key);
 
     //search for place to insert
@@ -45,8 +82,8 @@ void binary_search_tree::insert(int key)
     if(back == NULL)
     {
         std::cout << "\nExecuting back == NULL";//TESTING
-        m_pRoot = newNode;
-        std::cout << "\nRoot: " << m_pRoot->key;//TESTING
+        this->m_pRoot = newNode;
+        std::cout << "\nRoot: " << this->m_pRoot->key;//TESTING
     }
 
     //newNode is not root node
@@ -227,23 +264,30 @@ void binary_search_tree::insert(int key)
             temp = Search(token);
     }
 }*/
-//##############################################################################################################################
+//---------------------------------
+//FUNCTION: PrintAll()
+//PURPOSE: calls private fctn
+//print
+//---------------------------------
 //This function shall call the private function PrintAll() passing in the root of the tree.
-void binary_search_tree::PrintAll()
+void binary_search_tree::printAll()
 {
-    PrintAll(m_pRoot);
+    this->printAll(this->m_pRoot);
 }
-//##############################################################################################################################
+//---------------------------------
+//FUNCTION: PrintAll()
+//PURPOSE:
+//---------------------------------
 //This function shall call the private function PrintAll() passing in the root of the tree.
-void binary_search_tree::PrintAll(node *root)
+void binary_search_tree::printAll(node *root)
 {
     if(root != NULL)
     {
         //Print left sub-tree
-        PrintAll(root->left);
+        this->printAll(root->left);
         std::cout << "\n" << root->key;//TESTING
         //Print right sub-tree
-        PrintAll(root->right);
+        this->printAll(root->right);
     }
 }
 //##############################################################################################################################
@@ -268,20 +312,4 @@ void binary_search_tree::PrintAll(node *root)
     }
     else
         return temp;
-}*/
-//##############################################################################################################################
-//This function shall recursively traverse (post-order traversal) and destroy all
-//nodes in the tree
-/*void Translator::DestroyTree(TNode *rt)
-{
-    if (rt == NULL)
-        return;
-    if (rt->left != NULL)
-        DestroyTree(rt->left);
-    if (rt->right != NULL)
-        DestroyTree(rt->right);
-    std::cout << "\nDeleting: " << rt->EngWord;			//TESTING
-    delete rt;
-    rt = NULL;//TESTING
-    return;
 }*/
