@@ -3,6 +3,7 @@
 // Author: sammaniamsam
 //====================================================================
 #include <iostream>
+#include <queue>
 //---------------------------------
 
 #ifndef BINARY_SEARCH_TREE_BINARYSEARCHTREE_H
@@ -28,7 +29,7 @@ private:
     node *m_pRoot;
 
     //private functions
-    void printAll(node *root);
+    void postorderTraversal(node *root, std::queue<node *> *path);
     //TNode *Search(char *aWord);
     void DestroyTree(node *root);
 
@@ -40,7 +41,7 @@ public:
     //TNode *RemoveWord(char *aWord);
     //bool ChangeWord(char *aWord, char *eWord);
     //void Translate(char *line);
-    void printAll();
+    void postorderTraversal(std::queue<node *> *path);
 };
 
 #endif //BINARY_SEARCH_TREE_BINARYSEARCHTREE_H

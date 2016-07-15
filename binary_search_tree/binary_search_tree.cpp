@@ -29,6 +29,22 @@ void binary_search_tree::DestroyTree(node *root)
 }
 
 //---------------------------------
+//FUNCTION: postorderTraversal()
+//PURPOSE: Performs a post order
+//taversal of the BST and stroes
+//route take in path queue
+//---------------------------------
+void binary_search_tree::postorderTraversal(node *root, std::queue<node *> *path)
+{
+    if(root != NULL)
+    {
+        this->postorderTraversal(root->left, path);
+        this->postorderTraversal(root->right, path);
+        path->push(root);
+    }
+}
+
+//---------------------------------
 //---------------------------------
 //--------PUBLIC METHODS----------
 //---------------------------------
@@ -36,7 +52,8 @@ void binary_search_tree::DestroyTree(node *root)
 
 //---------------------------------
 //FUNCTION: binary_search_tree()
-//PURPOSE: sets m_pRoot to NULL
+//PURPOSE: Initializes private
+//member variable m_pRoot.
 //---------------------------------
 binary_search_tree::binary_search_tree()
 {
@@ -100,6 +117,18 @@ void binary_search_tree::insert(int key)
             std::cout << "\n\n" << back->right->key << " is right of: " << back->key;//TESTING
         }
     }
+}
+
+//---------------------------------
+//FUNCTION: postorderTraversal()
+//PURPOSE: Calls private fctn
+//postorderTraversal() and passes
+//it queue that stores the traversal
+//path.
+//---------------------------------
+void binary_search_tree::postorderTraversal(std::queue<node *> *path)
+{
+    this->postorderTraversal(this->m_pRoot, path);
 }
 //##############################################################################################################################
 //This function shall take a single char array argument (the alien word). The function shall locate the alien word
@@ -264,32 +293,6 @@ void binary_search_tree::insert(int key)
             temp = Search(token);
     }
 }*/
-//---------------------------------
-//FUNCTION: PrintAll()
-//PURPOSE: calls private fctn
-//print
-//---------------------------------
-//This function shall call the private function PrintAll() passing in the root of the tree.
-void binary_search_tree::printAll()
-{
-    this->printAll(this->m_pRoot);
-}
-//---------------------------------
-//FUNCTION: PrintAll()
-//PURPOSE:
-//---------------------------------
-//This function shall call the private function PrintAll() passing in the root of the tree.
-void binary_search_tree::printAll(node *root)
-{
-    if(root != NULL)
-    {
-        //Print left sub-tree
-        this->printAll(root->left);
-        std::cout << "\n" << root->key;//TESTING
-        //Print right sub-tree
-        this->printAll(root->right);
-    }
-}
 //##############################################################################################################################
 //This function shall search the tree and return a pointer to the node wit the key aWord
 //or NULL if the word was not found.
