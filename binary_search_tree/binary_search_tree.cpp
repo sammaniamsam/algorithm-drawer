@@ -152,6 +152,43 @@ void binary_search_tree::insert(int key)
 }
 
 //---------------------------------
+//FUNCTION: search()
+//PURPOSE: Looks for node in BST
+//that has the same key as the
+//key argument passed in. The queue
+//argument passed in stores the
+//traversal path. Finally, if no
+//match is found then false is
+//returned
+//---------------------------------
+bool binary_search_tree::search(int& key, std::queue<node *> *path)
+{
+    //define variables
+    node *temp;
+    temp = m_pRoot;
+    path->push(temp);
+
+    //search for key in BST
+    while((temp != NULL) && (key != temp->key))
+    {
+        if(key < temp->key)
+            temp = temp->left;
+        else
+            temp = temp->right;
+        path->push(temp);
+    }
+
+    //did not find key
+    if(temp == NULL)
+    {
+        std::cout << "\n" << "Key: " << key << " not found" << "\n";//TESTING
+        return false;
+    }
+    else
+        return true;
+}
+
+//---------------------------------
 //FUNCTION: preorderTraversal()
 //PURPOSE: Calls private fctn
 //preorderTraversal() and passes
@@ -307,72 +344,3 @@ bool binary_search_tree::removeNode(int key)
         }//end Case 2
     }
 }
-//##############################################################################################################################
-//This function shall take two char array arguments: an alien word and its' English equivalent.
-//The function shall serch the binary tree, locate the alien word and change the English translation
-//to the new English word then return true. If the alien word was not found then it shall return false.
-/*bool Translator::ChangeWord(char *aWord, char *eWord)
-{
-    TNode *temp;
-    temp = Search(aWord);
-
-    if(temp == NULL)
-        return false;
-    else
-    {
-        strcpy(temp->EngWord, eWord);
-        return true;
-    }
-}*/
-//##############################################################################################################################
-//This function shall take a string argument consisting of alien words separated by spaces to be translated into English.
-//The function shall parse out each word, look it up in the binary tree and print the English translation. All words
-//translated from a single string will appear on a single line on the screen.
-/*void Translator::Translate(char *line)
-{
-    char *token = NULL;
-    TNode *temp;
-    char tokChars[11] = {' ',',',':',';','.','"','\'','!','?'};
-
-    //Print alien words
-    //cout <<"\n" << line << "\n";	//COMMENT BACK IN!!!
-
-    //Get first word in the line and translate it
-    token = strtok(line, tokChars);
-    temp = Search(token);
-
-    //Translate the rest of the line
-    while(token != NULL)
-    {
-        if(temp != NULL)
-            std::cout << temp->EngWord << " ";
-        else
-            std::cout << "UNKNOWN ";
-        token = strtok(NULL, tokChars);
-        if (token != NULL)
-            temp = Search(token);
-    }
-}*/
-//##############################################################################################################################
-//This function shall search the tree and return a pointer to the node wit the key aWord
-//or NULL if the word was not found.
-/*TNode *Translator::Search(char *aWord)
-{
-    TNode *temp;
-    temp = m_pRoot;
-
-    while((temp != NULL) && (strcmp(aWord, temp->key) != 0))
-    {
-        if(strcmp(aWord, temp->key) < 0)
-            temp = temp->left;
-        else
-            temp = temp->right;
-    }
-    if(temp == NULL)
-    {
-        std::cout << "\nKey: " << aWord << " not found";	//TESTING
-        return NULL;
-    }
-    else
-        return temp;
-}*/

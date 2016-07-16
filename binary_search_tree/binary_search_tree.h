@@ -29,16 +29,14 @@ private:
     void preorderTraversal(node *root, std::queue<node *> *path);
     void inorderTraversal(node *root, std::queue<node *> *path);
     void postorderTraversal(node *root, std::queue<node *> *path);
-    //TNode *Search(char *aWord);
     void destroyTree(node *root);
 
 public:
     binary_search_tree();
     ~binary_search_tree();
     void insert(int key);
+    bool search(int& key, std::queue<node *> *path);
     bool removeNode(int key);
-    //bool ChangeWord(char *aWord, char *eWord);
-    //void Translate(char *line);
     void preorderTraversal(std::queue<node *> *path);
     void inorderTraversal(std::queue<node *> *path);
     void postorderTraversal(std::queue<node *> *path);
