@@ -11,23 +11,26 @@
 //---------------------------------
 //---------------------------------
 
-void min_heap::buildBottomUp (std::queue<node *>* mhQueue) {
+void min_heap::topDown (unsigned long position) {
 
-    mhQueue[mhQueue->size()/2];
-    //if(2 children)
-        //if(parent > right OR parent > left)
-            //if(parent > right AND parent > left)
-                //if(left > right)
-                    //swap right and parent
-                //else
-                    //swap left and parent
-            //else if(parent > left)
-                //swap left and parent
-            //else
-                //swap right and parent
-    //else (one child)
-        //if(parent > left)
-            //swap left and parent
+    //root
+    if (position == 1) return;
+    //not root
+    else {
+        //child < parent
+        if(this->minHeapVector->at(position-1)->key < this->minHeapVector->at((position/2)-1)->key) {
+            //swap child, parent keys
+            int tempKey = this->minHeapVector->at(position-1)->key;
+            this->minHeapVector->at(position-1)->key = this->minHeapVector->at((position/2)-1)->key;
+            this->minHeapVector->at((position/2)-1)->key = tempKey;
+            //compare parent w/ new key
+            topDown(position/2);
+        }
+        //child > parent
+        else {
+            return;
+        }
+    }
 }
 
 //---------------------------------
@@ -41,11 +44,12 @@ min_heap::min_heap() {
 }
 
 void min_heap::insert(int& key) {
+
     node* newNode;
     newNode = new node(key);
 
-    this->minHeapQueue->push(newNode);
+    this->minHeapVector->push_back(newNode);
 
-    this->buildBottomUp(this->minHeapQueue);
+    this->topDown(minHeapVector->size());
 }
 
