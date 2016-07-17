@@ -11,6 +11,8 @@ set(SOURCE_FILES
         binary_search_tree/test_bst.h
         binary_search_tree/test_bst.cpp
         main.cpp
-        max_heap/max_heap.h min_heap/min_heap.cpp)
+        max_heap/max_heap.h
+        min_heap/min_heap.h
+        min_heap/min_heap.cpp)
 
 add_executable(algorithm_drawer ${SOURCE_FILES})
