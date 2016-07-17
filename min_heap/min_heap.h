@@ -1,26 +1,33 @@
 //====================================================================
-// max_heap.h
+// min_heap.h
 // Author: sammaniamsam
 //====================================================================
 #include <iostream>
 //---------------------------------
 
-#ifndef ALGORITHM_DRAWER_MAX_HEAP_H
-#define ALGORITHM_DRAWER_MAX_HEAP_H
+#ifndef ALGORITHM_DRAWER_MIN_HEAP_H
+#define ALGORITHM_DRAWER_MIN_HEAP_H
 
 //---------------------------------
 struct node // the structure for representing tree nodes
 {
     int key;
-    unsigned char height;
+    unsigned int height;
     node* left;
     node* right;
     node(int k) { key = k; left = right = NULL; height = 1; }
 };
 //---------------------------------
 
-class maxHeap
+class min_heap
 {
+    private:
+        node *m_pRoot; //pointer to root node in min heap
+        void buildBottomUp (node* rootNode, node* newNode);
+    public:
+        min_heap();
+        ~min_heap();
+        void insert(int& key);
 //search()
 //insert()
 //delete()
@@ -32,4 +39,4 @@ class maxHeap
 //inorderTraversal()
 };
 
-#endif //ALGORITHM_DRAWER_MAX_HEAP_H
+#endif //ALGORITHM_DRAWER_HEAP_H
