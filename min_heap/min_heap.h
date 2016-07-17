@@ -3,6 +3,7 @@
 // Author: sammaniamsam
 //====================================================================
 #include <iostream>
+#include <queue>
 //---------------------------------
 
 #ifndef ALGORITHM_DRAWER_MIN_HEAP_H
@@ -23,7 +24,9 @@ class min_heap
 {
     private:
         node *m_pRoot; //pointer to root node in min heap
-        void buildBottomUp (node* rootNode, node* newNode);
+        std::queue<node *>* minHeapQueue;
+
+        void buildBottomUp (std::queue<node *>* mhQueue);
     public:
         min_heap();
         ~min_heap();
