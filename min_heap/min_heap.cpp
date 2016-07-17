@@ -14,6 +14,20 @@
 void min_heap::buildBottomUp (std::queue<node *>* mhQueue) {
 
     mhQueue[mhQueue->size()/2];
+    //if(2 children)
+        //if(parent > right OR parent > left)
+            //if(parent > right AND parent > left)
+                //if(left > right)
+                    //swap right and parent
+                //else
+                    //swap left and parent
+            //else if(parent > left)
+                //swap left and parent
+            //else
+                //swap right and parent
+    //else (one child)
+        //if(parent > left)
+            //swap left and parent
 }
 
 //---------------------------------
