@@ -11,7 +11,7 @@
 //---------------------------------
 //---------------------------------
 
-void min_heap::topDown (unsigned long position) {
+void min_heap::topDown(unsigned long position) {
 
     //root
     if (position == 1) return;
@@ -27,9 +27,7 @@ void min_heap::topDown (unsigned long position) {
             topDown(position/2);
         }
         //child > parent
-        else {
-            return;
-        }
+        else return;
     }
 }
 
@@ -40,7 +38,16 @@ void min_heap::topDown (unsigned long position) {
 //---------------------------------
 
 min_heap::min_heap() {
-    this->m_pRoot = NULL;
+    minHeapVector = new std::vector<node *>;
+}
+min_heap::~min_heap() {
+    node* nPtr;
+    while(!minHeapVector->empty()) {
+        nPtr = minHeapVector->back();
+        delete nPtr; nPtr = NULL;
+        minHeapVector->pop_back();
+    }
+    delete minHeapVector; minHeapVector = NULL;
 }
 
 void min_heap::insert(int& key) {

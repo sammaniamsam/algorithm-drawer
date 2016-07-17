@@ -23,7 +23,6 @@ struct node // the structure for representing tree nodes
 class min_heap
 {
     private:
-        node *m_pRoot; //pointer to root node in min heap
         std::vector<node *>* minHeapVector;
 
         void topDown (unsigned long position);
