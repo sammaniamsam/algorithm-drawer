@@ -26,6 +26,7 @@ class min_heap
         std::vector<node *>* minHeapVector;
 
         void topDown (unsigned long position);
+        void defineNodePtrs(unsigned long position);
     public:
         min_heap();
         ~min_heap();
