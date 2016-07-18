@@ -11,6 +11,10 @@
 //---------------------------------
 //---------------------------------
 
+//---------------------------------
+//FUNCTION:
+//PURPOSE:
+//---------------------------------
 void min_heap::topDown(unsigned long position) {
 
     //root
@@ -31,6 +35,10 @@ void min_heap::topDown(unsigned long position) {
     }
 }
 
+//---------------------------------
+//FUNCTION:
+//PURPOSE:
+//---------------------------------
 void min_heap::defineNodePtrs(unsigned long position) {
 
     //root
@@ -56,10 +64,25 @@ void min_heap::defineNodePtrs(unsigned long position) {
 //---------------------------------
 //---------------------------------
 
+//---------------------------------
+//FUNCTION:
+//PURPOSE:
+//---------------------------------
 min_heap::min_heap() {
+
     this->minHeapVector = new std::vector<node *>;
 }
+
+//---------------------------------
+//FUNCTION:
+//PURPOSE:
+//---------------------------------
+
+//DESTRUCTOR FUNCTION IS NOT CORRECT
+//NEEDS TO SET EACH HEAP NODES' PTRS
+//TO NULL
 min_heap::~min_heap() {
+
     node* nPtr;
     while(!this->minHeapVector->empty()) {
         nPtr = this->minHeapVector->back();
@@ -69,6 +92,10 @@ min_heap::~min_heap() {
     delete this->minHeapVector; this->minHeapVector = NULL;
 }
 
+//---------------------------------
+//FUNCTION:
+//PURPOSE:
+//---------------------------------
 void min_heap::insert(int& key) {
 
     node* newNode;
@@ -78,5 +105,26 @@ void min_heap::insert(int& key) {
     this->topDown(this->minHeapVector->size());
     //define heap nodes' ptrs
     this->defineNodePtrs(this->minHeapVector->size());
+}
+
+//---------------------------------
+//FUNCTION:
+//PURPOSE:
+//---------------------------------
+bool min_heap::search(int& key, std::queue<node *> *path) {
+
+    //declare variables
+    unsigned long i = 0;
+    std::vector<node *>::iterator it;
+
+    //search for key
+    for(it = this->minHeapVector->begin(); it != this->minHeapVector->end(); ++it, i++) {
+        //record search path
+        path->push(this->minHeapVector->at(i));
+        //key found
+        if(this->minHeapVector->at(i)->key == key) return true;
+    }
+    //key not found
+    return false;
 }
 

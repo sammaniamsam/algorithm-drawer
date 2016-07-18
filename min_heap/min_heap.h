@@ -4,6 +4,7 @@
 //====================================================================
 #include <iostream>
 #include <vector>
+#include <queue>
 //---------------------------------
 
 #ifndef ALGORITHM_DRAWER_MIN_HEAP_H
@@ -23,16 +24,16 @@ struct node // the structure for representing tree nodes
 class min_heap
 {
     private:
-        std::vector<node *>* minHeapVector;
+        std::vector<node *>* minHeapVector; //ptr to min heap
 
         void topDown (unsigned long position);
         void defineNodePtrs(unsigned long position);
+
     public:
         min_heap();
         ~min_heap();
         void insert(int& key);
-//search()
-//insert()
+        bool search(int& key, std::queue<node *> *path);
 //delete()
 //clear()
 //breadthFirstSearch()
