@@ -28,12 +28,14 @@ class min_heap
 
         void topDown (unsigned long position);
         void defineNodePtrs(unsigned long position);
+        void setPtrsNull();
 
     public:
         min_heap();
         ~min_heap();
         void insert(int& key);
         bool search(int& key, std::queue<node *> *path);
+        bool removeNode();
 //delete()
 //clear()
 //breadthFirstSearch()
