@@ -13,7 +13,10 @@
 
 //---------------------------------
 //FUNCTION: topDown()
-//PURPOSE:
+//PURPOSE: Recursive top-down re-heap
+//function that compares a child to
+//its' parent. Each child must be
+//greater than its' parent.
 //---------------------------------
 void min_heap::topDown(unsigned long position) {
 
@@ -37,7 +40,14 @@ void min_heap::topDown(unsigned long position) {
 
 //---------------------------------
 //FUNCTION: defineNodePtrs()
-//PURPOSE:
+//PURPOSE: Recursive function that
+//iterates backwards over the
+//heap and defines every parents'
+//ptrs. Since this heap is a complete
+//binary tree, nodes at an
+//even position are left children, and
+//nodes at an odd position are right
+//children.
 //---------------------------------
 void min_heap::defineNodePtrs(unsigned long position) {
 
@@ -60,7 +70,8 @@ void min_heap::defineNodePtrs(unsigned long position) {
 
 //---------------------------------
 //FUNCTION: setPtrsNull()
-//PURPOSE:
+//PURPOSE: Sets left and right ptrs
+//for each node to NULL.
 //---------------------------------
 void min_heap::setPtrsNull() {
 
@@ -79,7 +90,7 @@ void min_heap::setPtrsNull() {
 //FUNCTION: preorderTraversal()
 //PURPOSE: Performs a pre-order
 //traversal of the heap and stores
-//route taken in path queue
+//route taken in path queue.
 //---------------------------------
 void min_heap::preorderTraversal(node *root, std::queue<node *> *path)
 {
@@ -95,7 +106,7 @@ void min_heap::preorderTraversal(node *root, std::queue<node *> *path)
 //FUNCTION: inorderTraversal()
 //PURPOSE: Performs a in-order
 //traversal of the heap and stores
-//route taken in path queue
+//route taken in path queue.
 //---------------------------------
 void min_heap::inorderTraversal(node *root, std::queue<node *> *path)
 {
@@ -111,7 +122,7 @@ void min_heap::inorderTraversal(node *root, std::queue<node *> *path)
 //FUNCTION: postorderTraversal()
 //PURPOSE: Performs a post-order
 //traversal of the heap and stores
-//route taken in path queue
+//route taken in path queue.
 //---------------------------------
 void min_heap::postorderTraversal(node *root, std::queue<node *> *path)
 {
@@ -131,7 +142,8 @@ void min_heap::postorderTraversal(node *root, std::queue<node *> *path)
 
 //---------------------------------
 //FUNCTION: min_heap()
-//PURPOSE:
+//PURPOSE: Initialize private member
+//variable
 //---------------------------------
 min_heap::min_heap() {
 
@@ -140,12 +152,10 @@ min_heap::min_heap() {
 
 //---------------------------------
 //FUNCTION: ~min_heap()
-//PURPOSE:
+//PURPOSE: Deletes all dynamically
+//created instances of node and
+//vector
 //---------------------------------
-
-//DESTRUCTOR FUNCTION IS NOT CORRECT
-//NEEDS TO SET EACH HEAP NODES' PTRS
-//TO NULL
 min_heap::~min_heap() {
 
     //define variables
@@ -154,6 +164,7 @@ min_heap::~min_heap() {
     //set node ptrs to null
     this->setPtrsNull();
 
+    //deallocate memory to dynamic instances
     while(!this->minHeapVector->empty()) {
         nPtr = this->minHeapVector->back();
         delete nPtr;
@@ -164,7 +175,8 @@ min_heap::~min_heap() {
 
 //---------------------------------
 //FUNCTION: insert()
-//PURPOSE:
+//PURPOSE: Adds key to node and
+//inserts node into heap then re-heaps.
 //---------------------------------
 void min_heap::insert(int& key) {
 
@@ -184,8 +196,9 @@ void min_heap::insert(int& key) {
 
 //---------------------------------
 //FUNCTION: removeNode()
-//PURPOSE: Deletes the heaps root
-//node
+//PURPOSE: Deletes the heap's root
+//node and then re-heaps.
+//Returns false if heap is empty.
 //---------------------------------
 bool min_heap::removeNode() {
 
@@ -217,7 +230,10 @@ bool min_heap::removeNode() {
 
 //---------------------------------
 //FUNCTION: search()
-//PURPOSE:
+//PURPOSE: Searches for key in heap
+//and stores traversal route in
+//queue. Traversal time O(n).
+//Returns false if key is not found.
 //---------------------------------
 bool min_heap::search(int& key, std::queue<node *> *path) {
 
@@ -238,7 +254,8 @@ bool min_heap::search(int& key, std::queue<node *> *path) {
 
 //---------------------------------
 //FUNCTION: preorderTraversal()
-//PURPOSE:
+//PURPOSE: Passes queue to recursive
+//private fctn preorderTraversal()
 //---------------------------------
 void min_heap::preorderTraversal(std::queue<node *> *path) {
 
@@ -247,7 +264,8 @@ void min_heap::preorderTraversal(std::queue<node *> *path) {
 
 //---------------------------------
 //FUNCTION: inorderTraversal()
-//PURPOSE:
+//PURPOSE: Passes queue to recursive
+//private fctn inorderTraversal()
 //---------------------------------
 void min_heap::inorderTraversal(std::queue<node *> *path) {
 
@@ -256,7 +274,8 @@ void min_heap::inorderTraversal(std::queue<node *> *path) {
 
 //---------------------------------
 //FUNCTION: postorderTraversal()
-//PURPOSE:
+//PURPOSE: Passes queue to recursive
+//private fctn postorderTraversal()
 //---------------------------------
 void min_heap::postorderTraversal(std::queue<node *> *path) {
 
