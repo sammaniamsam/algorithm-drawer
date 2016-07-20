@@ -7,7 +7,7 @@
 struct node // the structure for representing tree nodes
 {
     int key;
-    unsigned char height;
+    unsigned int height;
     node* left;
     node* right;
     node(int k) { key = k; left = right = NULL; height = 1; }
