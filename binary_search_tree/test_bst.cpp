@@ -18,7 +18,7 @@ void test_bst::test_bst_insert() {
     for(int i = 0; i < iArraySize; i++)
         this->bstPtr->insert(iArray[i]);
     std::cout << "\n\n";
-;}
+}
 
 void test_bst::test_bst_preorderTraversal() {
     this->bstPtr->preorderTraversal(this->path);

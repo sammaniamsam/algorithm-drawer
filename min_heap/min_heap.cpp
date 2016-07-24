@@ -63,6 +63,9 @@ void min_heap::defineNodePtrs(unsigned long position) {
         else {
             this->minHeapVector->at((position/2)-1)->right = this->minHeapVector->at(position-1);
         }
+        //define parent
+        this->minHeapVector->at(position-1)->parent = this->minHeapVector->at((position/2)-1);
+
         //connect next child to parent
         this->defineNodePtrs(position-1);
     }
@@ -82,7 +85,9 @@ void min_heap::setPtrsNull() {
     //iterate though heap
     for (it = this->minHeapVector->begin(); it != this->minHeapVector->end(); ++it, i++) {
         //set node ptrs to NULL
-        this->minHeapVector->at(i)->left = this->minHeapVector->at(i)->right = NULL;
+        this->minHeapVector->at(i)->parent =
+        this->minHeapVector->at(i)->left =
+        this->minHeapVector->at(i)->right = NULL;
     }
 }
 

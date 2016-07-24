@@ -17,7 +17,8 @@ struct node // the structure for representing tree nodes
     unsigned int height;
     node* left;
     node* right;
-    node(int k) { key = k; left = right = NULL; height = 1; }
+    node *parent;
+    node(int k) { key = k; left = right = parent = NULL; height = 1; }
 };
 //---------------------------------
 
